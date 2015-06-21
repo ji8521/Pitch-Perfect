@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BK3-xM-mPn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -60,8 +61,6 @@
                                 <exclude reference="YCr-Mq-YNH"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="KT1-th-jrf"/>
-                                <exclude reference="q51-iJ-kQi"/>
                                 <exclude reference="Sqb-Mu-lrf"/>
                                 <exclude reference="ig5-hH-nEM"/>
                                 <exclude reference="2G3-ZA-SbD"/>
@@ -69,6 +68,8 @@
                                 <exclude reference="UAy-3T-hTO"/>
                                 <exclude reference="mt1-5d-4xL"/>
                                 <exclude reference="wrG-2f-VHR"/>
+                                <exclude reference="KT1-th-jrf"/>
+                                <exclude reference="q51-iJ-kQi"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -77,8 +78,6 @@
                                 <include reference="YCr-Mq-YNH"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="KT1-th-jrf"/>
-                                <include reference="q51-iJ-kQi"/>
                                 <include reference="Sqb-Mu-lrf"/>
                                 <include reference="ig5-hH-nEM"/>
                                 <exclude reference="2G3-ZA-SbD"/>
@@ -86,6 +85,8 @@
                                 <exclude reference="UAy-3T-hTO"/>
                                 <include reference="mt1-5d-4xL"/>
                                 <include reference="wrG-2f-VHR"/>
+                                <include reference="KT1-th-jrf"/>
+                                <include reference="q51-iJ-kQi"/>
                             </mask>
                         </variation>
                     </view>
@@ -110,6 +111,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LZj-Fa-kkX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CJQ-iu-LOP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fg-Y1-o43">
@@ -199,10 +201,16 @@
                                 <exclude reference="3Sp-iP-zvR"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="JNh-9k-L8s"/>
                                 <exclude reference="FXp-Vq-ZeR"/>
                                 <exclude reference="Oxz-Kv-RCQ"/>
                                 <exclude reference="aQc-qk-MGp"/>
                                 <exclude reference="m4T-OD-IyP"/>
+                                <exclude reference="Ha9-BZ-fhL"/>
+                                <exclude reference="Idy-6O-96O"/>
+                                <exclude reference="gf4-fP-oKg"/>
+                                <exclude reference="6ii-xi-zZ0"/>
+                                <exclude reference="OfJ-Bl-sQL"/>
                                 <exclude reference="4Hf-6j-LEc"/>
                                 <exclude reference="D0a-wF-gec"/>
                                 <exclude reference="EKo-72-iBP"/>
@@ -216,12 +224,6 @@
                                 <exclude reference="igD-OU-frK"/>
                                 <exclude reference="wss-OD-AJw"/>
                                 <exclude reference="yny-gF-idJ"/>
-                                <exclude reference="6ii-xi-zZ0"/>
-                                <exclude reference="OfJ-Bl-sQL"/>
-                                <exclude reference="Ha9-BZ-fhL"/>
-                                <exclude reference="Idy-6O-96O"/>
-                                <exclude reference="gf4-fP-oKg"/>
-                                <exclude reference="JNh-9k-L8s"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -233,10 +235,16 @@
                                 <include reference="3Sp-iP-zvR"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="JNh-9k-L8s"/>
                                 <exclude reference="FXp-Vq-ZeR"/>
                                 <include reference="Oxz-Kv-RCQ"/>
                                 <include reference="aQc-qk-MGp"/>
                                 <exclude reference="m4T-OD-IyP"/>
+                                <include reference="Ha9-BZ-fhL"/>
+                                <include reference="Idy-6O-96O"/>
+                                <include reference="gf4-fP-oKg"/>
+                                <include reference="6ii-xi-zZ0"/>
+                                <include reference="OfJ-Bl-sQL"/>
                                 <exclude reference="4Hf-6j-LEc"/>
                                 <exclude reference="D0a-wF-gec"/>
                                 <exclude reference="EKo-72-iBP"/>
@@ -250,12 +258,6 @@
                                 <exclude reference="igD-OU-frK"/>
                                 <exclude reference="wss-OD-AJw"/>
                                 <exclude reference="yny-gF-idJ"/>
-                                <include reference="6ii-xi-zZ0"/>
-                                <include reference="OfJ-Bl-sQL"/>
-                                <include reference="Ha9-BZ-fhL"/>
-                                <include reference="Idy-6O-96O"/>
-                                <include reference="gf4-fP-oKg"/>
-                                <include reference="JNh-9k-L8s"/>
                             </mask>
                         </variation>
                     </view>

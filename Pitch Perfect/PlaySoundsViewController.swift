@@ -32,6 +32,7 @@ class PlaySoundsViewController: UIViewController {
     audioPlayer.enableRate = true
     audioEngine = AVAudioEngine()
     audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        AVAudioSession.sharedInstance().overrideOutputAudioPort(.Speaker, error: nil)
     
     }
   
@@ -71,6 +72,7 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.startAndReturnError(nil)
         
         audioPlayerNode.play()
+        AVAudioSession.sharedInstance().overrideOutputAudioPort(.Speaker, error: nil)
     }
     
     @IBAction func playDarthVaderAudio(sender: AnyObject) {
