@@ -11,93 +11,143 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
 
-    var audioPlayer:AVAudioPlayer!
-    var receivedAudio:RecordedAudio!
-    var audioEngine:AVAudioEngine!
-    var audioFile:AVAudioFile!
+    // references to UI elements
+    @IBOutlet weak var play: UIButton!
+    @IBOutlet weak var stop: UIButton!
+    @IBOutlet weak var reset: UIButton!
    
+    // Global variables
+    var receivedAudio: RecordedAudio!
+    var audioPlayerNode: AVAudioPlayerNode!
+    var audioEngine: AVAudioEngine!
+    var audioFile: AVAudioFile!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // if var filePath = NSBundle.mainBundle().URLForResource("movie_quote", withExtension: "mp3") {
-            
-            
-//
-// } else {
-//            println("the filePath is empty")
-//        }
-
-    
-    audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
-    audioPlayer.enableRate = true
-    audioEngine = AVAudioEngine()
-    audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
-        AVAudioSession.sharedInstance().overrideOutputAudioPort(.Speaker, error: nil)
-    
-    }
-  
-        @IBAction func slowButton(sender: UIButton) {
-        audioPlayer.stop()
-        audioPlayer.rate = 0.5
-        audioPlayer.play()
         
-    }
-
-    @IBAction func fastButton(sender: UIButton) {
-        audioPlayer.stop()
-        audioPlayer.rate = 2.0
-        audioPlayer.play()
-    }
-
-    @IBAction func playChipmunkAudio(sender: UIButton) {
-        playAudioWithVariablePitch(1000)
+        // Make sure the stop button is not enabled from the start
+        stop.enabled = false
+        
+        // Get the audio file from recorder
+        audioEngine = AVAudioEngine()
+        audioFile = try! AVAudioFile(forReading: receivedAudio.filePathUrl)
+        let session: AVAudioSession = AVAudioSession.sharedInstance()
+        try! session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
     }
     
-    func playAudioWithVariablePitch(pitch: Float) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-        
-        var audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
-        
-        var changePitchEffect = AVAudioUnitTimePitch()
-        changePitchEffect.pitch = pitch
-        audioEngine.attachNode(changePitchEffect)
-        
-        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
-        
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        audioEngine.startAndReturnError(nil)
-        
-        audioPlayerNode.play()
-        AVAudioSession.sharedInstance().overrideOutputAudioPort(.Speaker, error: nil)
-    }
-    
-    @IBAction func playDarthVaderAudio(sender: AnyObject) {
-        
-        playAudioWithVariablePitch(-1000)
-    }
-    
-    @IBAction func stopButton(sender: UIButton) {
-        audioPlayer.stop()
-    }
-  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    /** ***************************** **/
+     /// Normal values
+     /// =================
+     /// Playback rate: 1
+     /// Pitch:         0
+     /// Reverb:        0
+     /// Echo/Interval: 0
+     ///
+     ///
+     /// Ranges values
+     /// =================
+     /// Playback rate: 0.25 to 4
+     /// Pitch:         -2400 to 2400
+     /// Reverb:        0 to 100
+     /// Echo/Interval: 0 to 2
+     /** ***************************** **/
+     
+     // Due to the fact when changing the rate of playback using the AVAudioUnitVarispeed class,
+     // it resemplas the audio and modifies both the rate AND the pitch. This is due to the fact,
+     // that pitch is measured in "cents" (used in measuring musical instruments) and therefore as
+     // you change the rate, the tone is also changing, thus mimicing a more real effect of the rate.
+     // As the pitch can be defined as pitch = 1200.0 * log2(rate), we can calculate that with the
+     // value 1.5 we need to put the pitch -700 cents back, and with 0.5, 1200 cents above 0 to neutralize this effect.
+     //
+     // See: https://developer.apple.com/library/prerelease/ios/documentation/AVFoundation/Reference/AVAudioUnitVarispeed_Class/index.html#//apple_ref/occ/instp/AVAudioUnitVarispeed/rate
+     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func playSlow(sender: UIButton) {
+        playAudio(1200, rate: 0.5, reverb: 0, echo: 0)
     }
-    */
-
+     
+    @IBAction func playFast(sender: UIButton) {
+        playAudio(-700, rate: 1.5, reverb: 0, echo: 0)
+    }
+     
+    @IBAction func playChipmunk(sender: UIButton) {
+        playAudio(1000, rate: 1, reverb: 0, echo: 0)
+    }
+     
+    @IBAction func playDarthVader(sender: UIButton) {
+        playAudio(-1000, rate: 1, reverb: 0, echo: 0)
+    }
+     
+    @IBAction func playEcho(sender: UIButton) {
+        playAudio(0, rate: 1, reverb: 0, echo: 0.2)
+    }
+     
+    
+    @IBAction func playNormal(sender: UIButton) {
+        playAudio(0, rate: 1, reverb: 0, echo: 0)
+    }
+     
+    
+    /** Function used to play a recorded audio using different parameters/effects **/
+    private func playAudio(pitch : Float, rate: Float, reverb: Float, echo: Float) {
+        // Initialize variables
+        audioEngine = AVAudioEngine()
+        audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        // Setting the pitch
+        let pitchEffect = AVAudioUnitTimePitch()
+        pitchEffect.pitch = pitch
+        audioEngine.attachNode(pitchEffect)
+        
+        // Setting the platback-rate
+        let playbackRateEffect = AVAudioUnitVarispeed()
+        playbackRateEffect.rate = rate
+        audioEngine.attachNode(playbackRateEffect)
+        
+        // Setting the reverb effect
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(AVAudioUnitReverbPreset.Cathedral)
+        reverbEffect.wetDryMix = reverb
+        audioEngine.attachNode(reverbEffect)
+        
+        // Setting the echo effect on a specific interval
+        let echoEffect = AVAudioUnitDelay()
+        echoEffect.delayTime = NSTimeInterval(echo)
+        audioEngine.attachNode(echoEffect)
+        
+        // Chain all these up, ending with the output
+        audioEngine.connect(audioPlayerNode, to: playbackRateEffect, format: nil)
+        audioEngine.connect(playbackRateEffect, to: pitchEffect, format: nil)
+        audioEngine.connect(pitchEffect, to: reverbEffect, format: nil)
+        audioEngine.connect(reverbEffect, to: echoEffect, format: nil)
+        audioEngine.connect(echoEffect, to: audioEngine.outputNode, format: nil)
+        
+        // enable the Stop button
+        stop.enabled = true
+        
+        // Good practice to stop before starting
+        audioPlayerNode.stop()
+        
+        // Play the audio file
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        try! audioEngine.start()
+        audioPlayerNode.play()
+    }
+    
+    /** Function used to stop the audio; connected to the UI element **/
+    
+    @IBAction func stopAudio(sender: AnyObject) {
+            // Stop any audio
+            audioPlayerNode.stop()
+            // Disable the stop button
+            stop.enabled = false
+    }
 }

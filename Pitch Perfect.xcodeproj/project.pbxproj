@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		9778732A1B32231000B2FDD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977873291B32231000B2FDD2 /* AppDelegate.swift */; };
 		9778732C1B32231000B2FDD2 /* RecordSoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778732B1B32231000B2FDD2 /* RecordSoundsViewController.swift */; };
-		9778732F1B32231000B2FDD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9778732D1B32231000B2FDD2 /* Main.storyboard */; };
 		977873311B32231000B2FDD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 977873301B32231000B2FDD2 /* Images.xcassets */; };
 		977873341B32231000B2FDD2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977873321B32231000B2FDD2 /* LaunchScreen.xib */; };
 		977873401B32231000B2FDD2 /* Pitch_PerfectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778733F1B32231000B2FDD2 /* Pitch_PerfectTests.swift */; };
 		9778734A1B35DE3F00B2FDD2 /* PlaySoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977873491B35DE3F00B2FDD2 /* PlaySoundsViewController.swift */; };
 		9778734E1B35FE7D00B2FDD2 /* RecordedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778734D1B35FE7D00B2FDD2 /* RecordedAudio.swift */; };
+		979F6C671BE98CC700C481D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979F6C651BE98CC700C481D5 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,6 @@
 		977873281B32231000B2FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		977873291B32231000B2FDD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9778732B1B32231000B2FDD2 /* RecordSoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSoundsViewController.swift; sourceTree = "<group>"; };
-		9778732E1B32231000B2FDD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		977873301B32231000B2FDD2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		977873331B32231000B2FDD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		977873391B32231000B2FDD2 /* Pitch PerfectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pitch PerfectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +39,7 @@
 		9778733F1B32231000B2FDD2 /* Pitch_PerfectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch_PerfectTests.swift; sourceTree = "<group>"; };
 		977873491B35DE3F00B2FDD2 /* PlaySoundsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySoundsViewController.swift; sourceTree = "<group>"; };
 		9778734D1B35FE7D00B2FDD2 /* RecordedAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordedAudio.swift; sourceTree = "<group>"; };
+		979F6C661BE98CC700C481D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +84,7 @@
 				977873291B32231000B2FDD2 /* AppDelegate.swift */,
 				9778732B1B32231000B2FDD2 /* RecordSoundsViewController.swift */,
 				9778734D1B35FE7D00B2FDD2 /* RecordedAudio.swift */,
-				9778732D1B32231000B2FDD2 /* Main.storyboard */,
+				979F6C651BE98CC700C481D5 /* Main.storyboard */,
 				977873491B35DE3F00B2FDD2 /* PlaySoundsViewController.swift */,
 				977873301B32231000B2FDD2 /* Images.xcassets */,
 				977873321B32231000B2FDD2 /* LaunchScreen.xib */,
@@ -162,6 +162,7 @@
 		9778731C1B32230F00B2FDD2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Jeff Isaray";
 				TargetAttributes = {
@@ -199,7 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9778732F1B32231000B2FDD2 /* Main.storyboard in Resources */,
+				979F6C671BE98CC700C481D5 /* Main.storyboard in Resources */,
 				977873341B32231000B2FDD2 /* LaunchScreen.xib in Resources */,
 				977873311B32231000B2FDD2 /* Images.xcassets in Resources */,
 			);
@@ -245,20 +246,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9778732D1B32231000B2FDD2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9778732E1B32231000B2FDD2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		977873321B32231000B2FDD2 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				977873331B32231000B2FDD2 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		979F6C651BE98CC700C481D5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				979F6C661BE98CC700C481D5 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -354,6 +355,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pitch Perfect/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -367,6 +369,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pitch Perfect/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
