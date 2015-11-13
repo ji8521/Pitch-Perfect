@@ -20,7 +20,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
     
-    /** Lifecylcle methods **/
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,15 +28,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         
-        // Make sure the stop, pause button is hidden from the start; only enable it once the recording has started
+        // Stop and pause buttons are hidden
         stop.hidden = true
         pause.hidden = true
         
-        // Make sure the recording button is enabled
+        // Record button is visible
         record.enabled = true
         
-        // Make sure the label is not hidden and the proper text is set
-        recording.hidden = false
+        // Set label text
         recording.text = "Tap to record"
     }
     
@@ -46,29 +44,30 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    /** Function used to record audio; connected to the mic UI button **/
     @IBAction func recordAudio(sender: UIButton) {
-        // Show text "recording in progress"
+        // Set label to "recording in progress"
         recording.text = "Recording in progress"
         
-        // Make sure the stop, pause button is visible
+        // Stop and pause button are visible
         stop.hidden = false
         pause.hidden = false
         
-        // Make sure the record button is disabled until the current recording is ongoing
+        // Record button is hidden
         record.enabled = false
         
-        /** Start recording the user's voice **/
          // Set the path where to save the recording
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        
         // Get the current date which will be used as the name of the file
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
         let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
+        
         // Combine the directory and filename by putting them into an array
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        
         // Debugging purposes; print the filepath
         print(filePath)
         
@@ -83,37 +82,34 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
     }
     
-    /** Function used to pause/resume a recording; connected to the button on UI **/
     @IBAction func pauseRecording(sender: UIButton) {
         // If the recorder is currently recording
         if (audioRecorder.recording) {
             // Pause the recorder
             audioRecorder.pause()
-            // Change the image of the button to resemble play
+            // Set's pause image to play image
             pause.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
             // If it's not recording
         } else {
-            // Start the recording again; this should continue from where it was left;  don't use recordAtTime()!
+            // Starts recording from last location
             audioRecorder.record()
-            // Set back the pause image for the button
+            // Set's image back to pause
             pause.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
         }
         
     }
     
-    /** Called when the recording has been finished; this method is actually saving the file**/
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
-        // If successful
-        if (flag) {
-            // Save the recorded audio, by creating a new model object using the constructor
+        // If recording is successful
+        if flag {
+            // Save recorded audio by creating a new model object using the constructor
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
             
-            // Move to the next screen
+            // Show next screen (segue)
             performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         }
     }
     
-    /** This method is used to perform transitions to next views **/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "stopRecording") {
             let playSoundsVC : PlaySoundsViewController = segue.destinationViewController as! PlaySoundsViewController
@@ -124,14 +120,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     /** Stop recording and reset state **/
     @IBAction func stopRecording(sender: UIButton) {
-        // Change "recording in progress" label to "Tap to record"; make sure it's visible
+        // Change label to "Tap to record" and make it visible
         recording.hidden = false
         recording.text = "Tap to record"
         
-        // Stop the recording session
+        // Stop recording
         audioRecorder.stop()
         
-        // Hide stop button
+        // Stop button is hidden
         stop.hidden = true
     }
 }
